@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="EUC-KR">
+    <title>앉아가기 확률</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        WebFontConfig = {
+            custom: {
+                families: ['Nanum Gothic'],
+                urls: ['http://fonts.googleapis.com/earlyaccess/nanumgothic.css']
+            }
+        };
+        (function() {
+            var wf = document.createElement('script');
+            wf.src = ('https:' === document.location.protocol ? 'https' : 'http') +
+                '://ajax.googleapis.com/ajax/libs/webfont/1.4.10/webfont.js';
+            wf.type = 'text/javascript';
+            wf.async = 'true';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(wf, s);
+        })();
+    </script>
+    <style type="text/css">
+        body {
+            font-family: "Nanum Gothic", sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+<br>
+<h1>앉아가기 확률</h1>
+<br>
+<output type="text" id="departure"></output> 에서<br>
+<output type="text" id="course"></output> 방면으로 출발<br>
+<input type="button" class="btn btn-primary" value="창닫기" onclick="window.close()"><br><br>
+<output type="text" id="result1">현재시간 기준 지하철 의자 사용 가능성은</output> <output type="text" id="resultcommon">
+</output><output type="text" id="result2">% 입니다.</output><br>
+<output type="text" id="result3">경로석의 경우</output> <output type="text" id="resultsenior"></output><output type="text" id="result4">% 입니다.<br>
+<!--<script type="text/javascript" src="js/calcpeople.js"></script>-->
+<script>
+    document.getElementById("departure").value = opener.document.getElementById('answer1').value;
+    document.getElementById("course").value = opener.document.getElementById('answer2').value;
+</script>
+<script type="text/javascript">
+    var start = 0
+    var d = new Date();
+    var people=0;
+    var peopletotal = "gloval";
+    peopletotal=0;
+    var time;
+    var ride=0;
+    var alight=0;
+    var result1, result2;
+
+    if (document.getElementById("departure").value === '응암')
+        start = 1;
+    else if (document.getElementById("departure").value === '역촌')
+        start = 2;
+    else if (document.getElementById("departure").value === '불광')
+        start = 3;
+    else if (document.getElementById("departure").value === '독바위')
+        start = 4;
+    else if (document.getElementById("departure").value === '연신내')
+        start = 5;
+    else if (document.getElementById("departure").value === '구산')
+        start = 6;
+    else if (document.getElementById("departure").value === '새절(신사)')
+        start = 7;
+    else if (document.getElementById("departure").value === '증산(명지대앞)')
+        start = 8;
+    else if (document.getElementById("departure").value === '디지털미디어시티')
+        start = 9;
+    else if (document.getElementById("departure").value === '월드컵경기장(성산)')
+        start = 10;
+    else if (document.getElementById("departure").value === '마포구청')
+        start = 11;
+    else if (document.getElementById("departure").value === '망원')
+        start = 12;
+    else if (document.getElementById("departure").value === '합정')
+        start = 13;
+    else if (document.getElementById("departure").value === '상수')
+        start = 14;
+    else if (document.getElementById("departure").value === '광흥창(서강)')
+        start = 15;
+    else if (document.getElementById("departure").value === '대흥(서강대앞)')
+        start = 16;
+    else if (document.getElementById("departure").value === '공덕')
+        start = 17;
+    else if (document.getElementById("departure").value === '효창공원앞')
+        start = 18;
+    else if (document.getElementById("departure").value === '삼각지')
+        start = 19;
+    else if (document.getElementById("departure").value === '녹사평(용산구청)')
+        start = 20;
+    else if (document.getElementById("departure").value === '이태원')
+        start = 21;
+    else if (document.getElementById("departure").value === '한강진')
+        start = 22;
+    else if (document.getElementById("departure").value === '버티고개')
+        start = 23;
+    else if (document.getElementById("departure").value === '약수')
+        start = 24;
+    else if (document.getElementById("departure").value === '청구')
+        start = 25;
+    else if (document.getElementById("departure").value === '신당')
+        start = 26;
+    else if (document.getElementById("departure").value === '동묘앞')
+        start = 27;
+    else if (document.getElementById("departure").value === '창신')
+        start = 28;
+    else if (document.getElementById("departure").value === '보문')
+        start = 29;
+    else if (document.getElementById("departure").value === '안암(고대병원앞)')
+        start = 30;
+    else if (document.getElementById("departure").value === '고려대(종암)')
+        start = 31;
+    else if (document.getElementById("departure").value === '월곡(동덕여대)')
+        start = 32;
+    else if (document.getElementById("departure").value === '상월곡(한국과학기술연구원)')
+        start = 33;
+    else if (document.getElementById("departure").value === '돌곶이')
+        start = 34;
+    else if (document.getElementById("departure").value === '석계')
+        start = 35;
+    else if (document.getElementById("departure").value === '태릉입구')
+        start = 36;
+    else if (document.getElementById("departure").value === '화랑대(서울여대입구)')
+        start = 37;
+    else if (document.getElementById("departure").value === '봉화산(서울의료원)')
+        start = 38;
+    //console.log(start);
+
+    if (document.getElementById("course").value === '봉화산')
+    {
+        $.getJSON('http://openapi.seoul.go.kr:8088/6f714d4c5179687337354963744f71/json/CardSubwayTime/1/'+start+'/201709/6%ED%98%B8%EC%84%A0', function(data)
+        {
+            $.each(data.CardSubwayTime.row, function (key, value)
+            {
+                calcpeople(people, value);
+            });
+        });
+    }
+    if (document.getElementById("course").value === '응암')
+    {
+        $.getJSON('http://openapi.seoul.go.kr:8088/6f714d4c5179687337354963744f71/json/CardSubwayTime/'+start+'/38/201709/6%ED%98%B8%EC%84%A0', function(data)
+        {
+            $.each(data.CardSubwayTime.row, function (key, value)
+            {
+                calcpeople(people, value);
+            });
+        });
+    }
+
+    function calcpeople(people, value)
+    {
+        time=d.getHours();
+        people=0;
+
+        if (time === 4)
+        {
+            var ride=parseInt(value.FOUR_RIDE_NUM);
+            var alight=parseInt(value.FOUR_ALIGHT_NUM);
+        }
+        else if (time === 5)
+        {
+            var ride=parseInt(value.FIVE_RIDE_NUM);
+            var alight=parseInt(value.FIVE_ALIGHT_NUM);
+        }
+        else if (time === 6)
+        {
+            var ride=parseInt(value.SIX_RIDE_NUM);
+            var alight=parseInt(value.SIX_ALIGHT_NUM);
+        }
+        else if (time === 7)
+        {
+            var ride=parseInt(value.SEVEN_RIDE_NUM);
+            var alight=parseInt(value.SEVEN_ALIGHT_NUM);
+        }
+        else if (time === 8)
+        {
+            var ride=parseInt(value.EIGHT_RIDE_NUM);
+            var alight=parseInt(value.EIGHT_ALIGHT_NUM);
+        }
+        else if (time === 9)
+        {
+            var ride=parseInt(value.NINE_RIDE_NUM);
+            var alight=parseInt(value.NINE_ALIGHT_NUM);
+        }
+        else if (time === 10)
+        {
+            var ride=parseInt(value.TEN_RIDE_NUM);
+            var alight=parseInt(value.TEN_ALIGHT_NUM);
+        }
+        else if (time === 11)
+        {
+            var ride=parseInt(value.ELEVEN_RIDE_NUM);
+            var alight=parseInt(value.ELEVEN_ALIGHT_NUM);
+        }
+        else if (time === 12)
+        {
+            var ride=parseInt(value.TWELVE_RIDE_NUM);
+            var alight=parseInt(value.TWELVE_ALIGHT_NUM);
+        }
+        else if (time === 13)
+        {
+            var ride=parseInt(value.THIRTEEN_RIDE_NUM);
+            var alight=parseInt(value.THIRTEEN_ALIGHT_NUM);
+        }
+        else if (time === 14)
+        {
+            var ride=parseInt(value.FOURTEEN_RIDE_NUM);
+            var alight=parseInt(value.FOURTEEN_ALIGHT_NUM);
+        }
+        else if (time === 15)
+        {
+            var ride=parseInt(value.FIFTEEN_RIDE_NUM);
+            var alight=parseInt(value.FIFTEEN_ALIGHT_NUM);
+        }
+        else if (time === 16)
+        {
+            var ride=parseInt(value.SIXTEEN_RIDE_NUM);
+            var alight=parseInt(value.SIXTEEN_ALIGHT_NUM);
+        }
+        else if (time === 17)
+        {
+            var ride=parseInt(value.SEVENTEEN_RIDE_NUM);
+            var alight=parseInt(value.SEVENTEEN_ALIGHT_NUM);
+        }
+        else if (time === 18)
+        {
+            var ride=parseInt(value.EIGHTEEN_RIDE_NUM);
+            var alight=parseInt(value.EIGHTEEN_ALIGHT_NUM);
+        }
+        else if (time === 19)
+        {
+            var ride=parseInt(value.NINETEEN_RIDE_NUM);
+            var alight=parseInt(value.NINETEEN_ALIGHT_NUM);
+        }
+        else if (time === 20)
+        {
+            var ride=parseInt(value.TWENTY_RIDE_NUM);
+            var alight=parseInt(value.TWENTY_ALIGHT_NUM);
+        }
+        else if (time === 21)
+        {
+            var ride=parseInt(value.TWENTY_ONE_RIDE_NUM);
+            var alight=parseInt(value.TWENTY_ONE_ALIGHT_NUM);
+        }
+        else if (time === 22)
+        {
+            var ride=parseInt(value.TWENTY_TWO_RIDE_NUM);
+            var alight=parseInt(value.TWENTY_TWO_ALIGHT_NUM);
+        }
+        else if (time === 23)
+        {
+            var ride=parseInt(value.TWENTY_THREE_RIDE_NUM);
+            var alight=parseInt(value.TWENTY_THREE_ALIGHT_NUM);
+        }
+        else if (time === 0)
+        {
+            var ride=parseInt(value.MIDNIGHT_RIDE_NUM);
+            var alight=parseInt(value.MIDNIGHT_ALIGHT_NUM);
+        }
+        else if (time === 1)
+        {
+            var ride=parseInt(value.TWENTY_ONE_RIDE_NUM);
+            var alight=parseInt(value.TWENTY_ONE_ALIGHT_NUM);
+        }
+        else if (time === 2)
+        {
+            var ride=parseInt(value.ELEVEN_RIDE_NUM);
+            var alight=parseInt(value.ELEVEN_ALIGHT_NUM);
+        }
+        else if (time === 3)
+        {
+            var ride=parseInt(value.FIVE_RIDE_NUM);
+            var alight=parseInt(value.FIVE_ALIGHT_NUM);
+        }
+        people = ride - alight;
+        peopletotal = peopletotal + people;
+
+        /*console.log("people\t\t"+people);
+        console.log("peopletotal\t"+peopletotal);
+        console.log("ride\t\t"+ride);
+        console.log("alight\t\t"+alight);
+        console.log(time);
+        console.log("\n");*/
+
+        peopletotal=peopletotal/2;          //상행-하행 이등분
+        peopletotal=peopletotal/30;         //한 달 30일
+        peopletotal=peopletotal*60/7;       //배차간격 평균 7분
+        result1=Math.round(100-peopletotal/420*100);    //일반 좌석 420석 백분율
+        result2=Math.round(100-peopletotal/540*100);    //경로 좌석 540석 백분율
+
+        if(result1 >= 100)
+            result1=99.9;
+        if(result2 >= 100)
+            result2=99.9;
+
+        if(result1 <= 0)
+            result1=0.1;
+        if(result2 <= 0)
+            result2=0.1;
+
+        //console.log(peopletotal);
+
+        document.getElementById("resultcommon").value=result1;
+        document.getElementById("resultsenior").value=result2;
+
+        if(time >= 1 && time <= 5)
+        {
+            document.getElementById("result1").value="현재 지하철이 운행하지 않습니다.";
+            document.getElementById("result2").value="";
+            document.getElementById("result3").value="";
+            document.getElementById("result4").value="";
+            document.getElementById("resultcommon").value="";
+            document.getElementById("resultsenior").value="";
+        }
+
+        return peopletotal;
+    }
+</script>
+</body>
+</html>

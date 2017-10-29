@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>출발지 설정</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link href="css/stylish-portfolio.css" rel="stylesheet">
+
+    <script type="text/javascript" src="js/selectpopup.js"></script>
+    <script>
+        var openWin;
+        function openChild() {
+            // window.name = "부모창 이름";
+            window.name = "parentForm";
+            // window.open("open할 window", "자식창 이름", "팝업창 옵션");
+            openWin = window.open("result.html", "childForm", "width=570, height=350, resizable = no");
+        }
+    </script>
+    <script type="text/javascript">
+        WebFontConfig = {
+            custom: {
+                families: ['Nanum Gothic'],
+                urls: ['http://fonts.googleapis.com/earlyaccess/nanumgothic.css']
+            }
+        };
+        (function() {
+            var wf = document.createElement('script');
+            wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+                '://ajax.googleapis.com/ajax/libs/webfont/1.4.10/webfont.js';
+            wf.type = 'text/javascript';
+            wf.async = 'true';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(wf, s);
+        })();
+    </script>
+</head>
+<body>
+<header class="header" id="top">
+    <div class="text-vertical-center">
+        <h2>출발지 설정</h2>
+        <h4>탑승하실 역을 선택해주세요.</h4>
+        <br>
+        <button class="btn btn-secondary" onclick="openwindow('./selectstation.html')">역 선택</button>
+        <input type="text" id="answer1" size="20" placeholder="역을 선택해주세요"/><br><br>
+        <button class="btn btn-secondary" onclick="openwindow('./selectcourse.html')">방향 선택</button>
+        <input type="text" id="answer2" size="20" placeholder="방면을 선택해주세요"/><br><br>
+        <button class="btn btn-primary" onclick="openChild()">현재시간 기준 확률 계산</button>
+    </div>
+</header>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+</body>
+</html>
